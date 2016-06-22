@@ -1,0 +1,30 @@
+{
+  "name": "wpbp/debug",
+  "description": "Add to your plugin the Debug Bar support (work also on Query Monitor)",
+  "license": "GPL-3.0",
+  "keywords": [
+    "wordpress",
+    "debug",
+  ],
+  "homepage": "https://github.com/WPBP/Debug",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Daniele Scasciafratte",
+      "email": "mte90net@gmail.com",
+      "homepage": "http://mte90.net"
+    }
+  ],
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/WPBP/Debug.git"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "debug.php"
+    ]
+  }
+}

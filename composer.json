@@ -4,7 +4,7 @@
   "license": "GPL-3.0",
   "keywords": [
     "wordpress",
-    "debug",
+    "debug"
   ],
   "homepage": "https://github.com/WPBP/Debug",
   "type": "library",

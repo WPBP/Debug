@@ -13,6 +13,6 @@ Add to your plugin the Debug Bar support (work also on Query Monitor) with a sim
 ## Example
 
 ```php
-$debug = new WPBP_Debug( );
+$debug = new WPBP_Debug( 'Name of the panel' );
 $debug->log( __( 'Plugin Loaded', 'your-textdomain' ) );
 ```

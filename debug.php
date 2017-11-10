@@ -8,74 +8,76 @@
  * @copyright 2014 
  *
  */
-
 if ( !class_exists( 'WPBP_Debug' ) ) {
-    class WPBP_Debug {
 
-            /**
-            * Instance of this class.
-            *
-            * @var      object
-            *
-            * @since    1.0.0
-            */
-            protected static $instance = null;
+	class WPBP_Debug {
 
-            /**
-            * Check user cap and WP_DEBUG on init to see if class should continue loading
-            */
-            function __construct( ) {
-                    if ( !current_user_can( 'manage_options' ) || !WP_DEBUG ) {
-                            return;
-                    }
+		/**
+		 * Instance of this class.
+		 *
+		 * @var      object
+		 *
+		 * @since    1.0.0
+		 */
+		protected static $instance = null;
 
-                    add_filter( 'debug_bar_panels', array( $this, 'init_panel' ));
-            }
+		/**
+		 * Check user cap and WP_DEBUG on init to see if class should continue loading
+		 */
+		function __construct( $title ) {
+			if ( !current_user_can( 'manage_options' ) || !WP_DEBUG ) {
+				return;
+			}
+			$this->title = $title;
 
-            /**
-            * Debugs a variable
-            * Only visible to admins if WP_DEBUG is on
-            * @param mixed  $var      The var to debug.
-            * @param bool   $die      Whether to die after outputting.
-            * @param string $function The function to call, usually either print_r or var_dump, but can be anything.
-            * @return mixed
-            */
-            function log( $var, $die = false, $function = 'var_dump' ) {
-                    if ( !current_user_can( 'manage_options' ) || !WP_DEBUG ) {
-                            return;
-                    }
+			add_filter( 'debug_bar_panels', array( $this, 'init_panel' ) );
+		}
 
-                    ob_start();
-                    if ( is_string( $var ) ) {
-                            echo "- " . $var . "\n";
-                    } else {
-                            call_user_func( $function, $var );
-                    }
+		/**
+		 * Debugs a variable
+		 * Only visible to admins if WP_DEBUG is on
+		 * @param mixed  $var      The var to debug.
+		 * @param bool   $die      Whether to die after outputting.
+		 * @param string $function The function to call, usually either print_r or var_dump, but can be anything.
+		 * @return mixed
+		 */
+		function log( $var, $die = false, $function = 'var_dump' ) {
+			if ( !current_user_can( 'manage_options' ) || !WP_DEBUG ) {
+				return;
+			}
 
-                    if ( $die ) {
-                            die();
-                    }
+			ob_start();
+			if ( is_string( $var ) ) {
+				echo "- " . $var . "\n";
+			} else {
+				call_user_func( $function, $var );
+			}
 
-                    $debug = ob_get_clean();
+			if ( $die ) {
+				die();
+			}
 
-                    $GLOBALS['WPBP_Debug'][] = $debug;
+			$debug = ob_get_clean();
 
-                    // Allow this to be used as a filter
-                    return $var;
-            }
-            
-            /**
-            * Extend Debug_Bar_Panel
-            * @param array $panels The default panels.
-            * @return array passback The original panels.
-            */
-            function init_panel( $panels ) {
-                    if ( !class_exists( 'WPBP_Debug_Panel' ) ) {
-                            require_once('WPBP_Debug_Panel.php');
-                            $panels[] = new WPBP_Debug_Panel();
-                    }
-                    return $panels;
-            }
+			$GLOBALS[ 'WPBP_Debug' ][] = $debug;
 
-    }
+			// Allow this to be used as a filter
+			return $var;
+		}
+
+		/**
+		 * Extend Debug_Bar_Panel
+		 * @param array $panels The default panels.
+		 * @return array passback The original panels.
+		 */
+		function init_panel( $panels ) {
+			if ( !class_exists( 'WPBP_Debug_Panel' ) ) {
+				require_once('WPBP_Debug_Panel.php');
+				$panels[] = new WPBP_Debug_Panel( $this->title );
+			}
+			return $panels;
+		}
+
+	}
+
 }

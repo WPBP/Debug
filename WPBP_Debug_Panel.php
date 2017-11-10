@@ -7,8 +7,8 @@ class WPBP_Debug_Panel extends Debug_Bar_Panel {
 	/**
 	 * Register with WordPress API on construct
 	 */
-	function __construct(  ) {
-		$this->title( 'Plugin Name Debug' );
+	function __construct( $title ) {
+		$this->title( $title );
 	}
 
         /**

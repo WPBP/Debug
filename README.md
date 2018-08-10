@@ -15,4 +15,5 @@ Automatically will add a new panel and a menu entry with a counter of every item
 $debug = new WPBP_Debug( __( 'Name of the panel', 'your-textdomain' ) );
 $debug->log( __( 'Plugin Loaded', 'your-textdomain' ) );
 $debug->qm_log( __( 'Error inside the log panel of Query Monitor', 'your-textdomain' ), 'error' );
+$debug->qm_timer( 'profile_that_callback', function () { echo 'I need to be profiled!'; } );
 ```

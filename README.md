@@ -2,8 +2,11 @@
 [![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 ![Downloads](https://img.shields.io/packagist/dt/wpbp/debug.svg) 
 
-Add your plugin to Query Monitor with a simple way to log the activity.  
-Automatically will add a new panel and a menu entry with a counter of every item added.
+This package is a wrapper to Query Monitor for:
+
+* Create a custom alternative panel for log stuff inside Query Monitor
+* Add a timer method that use the Query Monitor internals
+* Add a method to print in the internal log panel of Query Monitor
 
 ## Install
 

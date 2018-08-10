@@ -19,6 +19,7 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 			if( class_exists('QM_Collectors') ) {
 				require_once( 'QM_Collector_WPBP_Debug.php' );
 				$this->title = $title;
+				$this->output = array();
 
 				QM_Collectors::add( new QM_Collector_WPBP_Debug( $this->title, $this ) );
 			}

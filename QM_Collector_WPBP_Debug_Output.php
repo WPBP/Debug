@@ -35,7 +35,7 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	*/
 	public function admin_title( array $title ) {
 		$data = $this->collector->get_data();
-		if ( is_array( $data['log'] ) ) {
+		if ( isset( $data['log'] ) ) {
 			$title[] = $this->title . ' (' .	count( $data['log'] ) . ')';
 		}
 		return $title;
@@ -52,8 +52,8 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	}
 
 	public function admin_menu( array $menu ) {
-		if ( is_array( $data['log'] ) ) {
-			$data = $this->collector->get_data();
+		$data = $this->collector->get_data();
+		if ( isset( $data['log'] ) ) {
 			$menu[] = $this->menu( array(
 				'id'    => $this->id,
 				'href'  => '#qm-' . str_replace( '_', '-', $this->id),

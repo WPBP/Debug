@@ -45,7 +45,6 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 		 * @return mixed
 		 */
 		function log( $var, $die = false, $function = 'var_dump' ) {
-
 			ob_start();
 			if ( is_string( $var ) ) {
 				echo $var . "\n";
@@ -58,6 +57,33 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 			}
 
 			$this->output[] = ob_get_clean();
+		}
+
+		/**
+		 * Print in Query Monitor Log panel, check https://querymonitor.com/blog/2018/07/profiling-and-logging/
+		 * @param mixed  $var  The var to debug.
+		 * @param string $type The error type based on Query Monitor methods.
+		 * @return mixed
+		 */
+		function qm_log( $var, $type ) {
+			QM::$type( $var );
+		}
+
+		/**
+		 * Timer in Query Monitor, check https://querymonitor.com/blog/2018/07/profiling-and-logging/
+		 * @param mixed  $var  The var to debug.
+		 * @param string $type The error type based on Query Monitor methods.
+		 * @return mixed
+		 */
+		function qm_log( $id, $callback ) {
+			// Start the timer:
+			do_action( 'qm/start', $id );
+
+			// Run some code
+			call_user_func( $callback );
+
+			// Stop the timer:
+			do_action( 'qm/stop', $id );
 		}
 
 	}

@@ -15,9 +15,13 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	* Outputs data in the footer
 	*/
 	public function output() {
+		echo '<div class="qm" id="' . esc_attr($this->collector->id()) . '">';
+		echo '<table cellspacing="0"><tbody>';
 		foreach ( $this->output as &$single ) {
-			echo $single . "<br>";
+			echo "<tr><td>" . $single . "</td></tr>";
 		}
+		echo '</tbody></table>';
+		echo '</div>';
 	}
 
 	/**
@@ -47,7 +51,7 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 		$data = $this->collector->get_data();
 		$menu[] = $this->menu( array(
 			'id'    => $this->id,
-			'href'  => '#' . str_replace( '_', '-', $this->id),
+			'href'  => '#qm-' . str_replace( '_', '-', $this->id),
 			'title' => $this->title . ' (' .	count( $data['log'] ) . ')'
 		));
 		return $menu;

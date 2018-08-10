@@ -13,15 +13,6 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 	class WPBP_Debug {
 
 		/**
-		 * Instance of this class.
-		 *
-		 * @var      object
-		 *
-		 * @since    1.0.0
-		 */
-		protected static $instance = null;
-
-		/**
 		 * Check user cap and WP_DEBUG on init to see if class should continue loading
 		 */
 		function __construct( $title ) {
@@ -29,7 +20,7 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 				require_once( 'QM_Collector_WPBP_Debug.php' );
 				$this->title = $title;
 
-				QM_Collectors::add( new QM_Collector_WPBP_Debug( $this->title ) );
+				QM_Collectors::add( new QM_Collector_WPBP_Debug( $this->title, $this ) );
 			}
 
 			/**
@@ -57,7 +48,7 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 
 			ob_start();
 			if ( is_string( $var ) ) {
-				echo "- " . $var . "\n";
+				echo $var . "\n";
 			} else {
 				call_user_func( $function, $var );
 			}
@@ -66,7 +57,7 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 				die();
 			}
 
-			$this->output = ob_get_clean();
+			$this->output[] = ob_get_clean();
 		}
 
 	}

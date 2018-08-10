@@ -4,8 +4,9 @@ class QM_Collector_WPBP_Debug extends QM_Collector {
 	/**
 	 * Register with WordPress API on construct
 	 */
-	function __construct( $title ) {
+	function __construct( $title, $parent ) {
 		$this->title = $title;
+		$this->parent = $parent;
 		$this->id = strtolower( str_replace(' ', '_', $title ) );
 	}
 
@@ -14,7 +15,7 @@ class QM_Collector_WPBP_Debug extends QM_Collector {
 	}
 
 	public function process() {
-		$this->data['log'] = 123;
+		$this->data['log'] = $this->parent->output;
 	}
 
 }

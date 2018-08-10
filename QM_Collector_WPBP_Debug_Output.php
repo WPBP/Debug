@@ -15,7 +15,9 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	* Outputs data in the footer
 	*/
 	public function output() {
-		echo $this->output;
+		foreach ( $this->output as &$single ) {
+			echo $single . "<br>";
+		}
 	}
 
 	/**
@@ -46,7 +48,7 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 		$menu[] = $this->menu( array(
 			'id'    => $this->id,
 			'href'  => '#' . str_replace( '_', '-', $this->id),
-			'title' => $this->title
+			'title' => $this->title . ' (' .	count( $data['log'] ) . ')'
 		));
 		return $menu;
 	}

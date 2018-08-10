@@ -74,11 +74,11 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 
 		/**
 		 * Timer in Query Monitor, check https://querymonitor.com/blog/2018/07/profiling-and-logging/
-		 * @param mixed  $var  The var to debug.
-		 * @param string $type The error type based on Query Monitor methods.
+		 * @param mixed  $id       Timer ID.
+		 * @param string $callback The callback to profile.
 		 * @return mixed
 		 */
-		function qm_log( $id, $callback ) {
+		function qm_timer( $id, $callback ) {
 			if ( class_exists( 'QM' ) ) {
 				// Start the timer:
 				do_action( 'qm/start', $id );

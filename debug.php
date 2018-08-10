@@ -29,8 +29,9 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 			*/
 			add_filter( 'qm/outputter/html', function(array $output, QM_Collectors $collectors) {
 				include 'QM_Collector_WPBP_Debug_Output.php';
-				if ( $collector = QM_Collectors::get( 'wpbp' ) ) {
-					$output['wpbp'] = new QM_Collector_WPBP_Debug_Output( $collector, $this->output, $this->title );
+				$id = strtolower( str_replace(' ', '_', $this->title ) );
+				if ( $collector = QM_Collectors::get( $id ) ) {
+					$output[ $id ] = new QM_Collector_WPBP_Debug_Output( $collector, $this->output, $this->title );
 				}
 				return $output;
 			}, 101, 2 );
@@ -66,7 +67,9 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 		 * @return mixed
 		 */
 		function qm_log( $var, $type ) {
-			QM::$type( $var );
+			if ( class_exists( 'QM' ) ) {
+				QM::$type( $var );
+			}
 		}
 
 		/**
@@ -76,14 +79,16 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 		 * @return mixed
 		 */
 		function qm_log( $id, $callback ) {
-			// Start the timer:
-			do_action( 'qm/start', $id );
+			if ( class_exists( 'QM' ) ) {
+				// Start the timer:
+				do_action( 'qm/start', $id );
 
-			// Run some code
-			call_user_func( $callback );
+				// Run some code
+				call_user_func( $callback );
 
-			// Stop the timer:
-			do_action( 'qm/stop', $id );
+				// Stop the timer:
+				do_action( 'qm/stop', $id );
+			}
 		}
 
 	}

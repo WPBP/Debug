@@ -1,6 +1,6 @@
 {
   "name": "wpbp/debug",
-  "description": "Add to your plugin the Debug Bar support (work also on Query Monitor)",
+  "description": "Add your plugin to Query Monitor",
   "license": "GPL-3.0",
   "keywords": [
     "wordpress",

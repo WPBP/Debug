@@ -15,13 +15,15 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	* Outputs data in the footer
 	*/
 	public function output() {
-		echo '<div class="qm" id="' . esc_attr($this->collector->id()) . '">';
-		echo '<table cellspacing="0"><tbody>';
-		foreach ( $this->output as &$single ) {
-			echo "<tr><td>" . $single . "</td></tr>";
+		if ( is_array( $this->output ) ) {
+			echo '<div class="qm" id="' . esc_attr($this->collector->id()) . '">';
+			echo '<table cellspacing="0"><tbody>';
+			foreach ( $this->output as &$single ) {
+				echo "<tr><td>" . $single . "</td></tr>";
+			}
+			echo '</tbody></table>';
+			echo '</div>';
 		}
-		echo '</tbody></table>';
-		echo '</div>';
 	}
 
 	/**
@@ -33,7 +35,9 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	*/
 	public function admin_title( array $title ) {
 		$data = $this->collector->get_data();
-		$title[] = $this->title . ' (' .	count( $data['log'] ) . ')';
+		if ( is_array( $data['log'] ) ) {
+			$title[] = $this->title . ' (' .	count( $data['log'] ) . ')';
+		}
 		return $title;
 	}
 
@@ -48,12 +52,14 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 	}
 
 	public function admin_menu( array $menu ) {
-		$data = $this->collector->get_data();
-		$menu[] = $this->menu( array(
-			'id'    => $this->id,
-			'href'  => '#qm-' . str_replace( '_', '-', $this->id),
-			'title' => $this->title . ' (' .	count( $data['log'] ) . ')'
-		));
+		if ( is_array( $data['log'] ) ) {
+			$data = $this->collector->get_data();
+			$menu[] = $this->menu( array(
+				'id'    => $this->id,
+				'href'  => '#qm-' . str_replace( '_', '-', $this->id),
+				'title' => $this->title . ' (' .	count( $data['log'] ) . ')'
+			));
+		}
 		return $menu;
 	}
 

@@ -15,7 +15,9 @@ class QM_Collector_WPBP_Debug extends QM_Collector {
 	}
 
 	public function process() {
-		$this->data['log'] = $this->parent->output;
+		if ( is_array( $this->parent->output ) ) {
+			$this->data['log'] = $this->parent->output;
+		}
 	}
 
 }

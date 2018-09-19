@@ -28,14 +28,24 @@ if ( !class_exists( 'WPBP_Debug' ) ) {
 			* Register output. The filter won't run if Query Monitor is not
 			* installed so we don't have to explicity check for it.
 			*/
-			add_filter( 'qm/outputter/html', function(array $output, QM_Collectors $collectors) {
-				include 'QM_Collector_WPBP_Debug_Output.php';
-				$id = strtolower( str_replace(' ', '_', $this->title ) );
-				if ( $collector = QM_Collectors::get( $id ) ) {
-					$output[ $id ] = new QM_Collector_WPBP_Debug_Output( $collector, $this->output, $this->title );
-				}
-				return $output;
-			}, 101, 2 );
+			add_filter( 'qm/outputter/html', array($this, 'load'), 101, 2 );
+		}
+
+		/**
+		 * Print panel
+		 *
+		 * @param string The HTML code.
+		 * @param object List of QM Collectors.
+		 * 
+		 * @return array
+		 */
+		function load(array $output, QM_Collectors $collectors) {
+			include 'QM_Collector_WPBP_Debug_Output.php';
+			$id = strtolower( str_replace(' ', '_', $this->title ) );
+			if ( $collector = QM_Collectors::get( $id ) ) {
+				$output[ $id ] = new QM_Collector_WPBP_Debug_Output( $collector, $this->output, $this->title );
+			}
+			return $output;
 		}
 
 		/**

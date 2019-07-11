@@ -17,6 +17,9 @@ class WPBP_Debug {
     */
     public function __construct( $title ) {
         if ( class_exists( 'QM_Collectors' ) ) {
+			if ( !class_exists( 'QM_Collector_WPBP_Debug' ) ) {
+				include 'QM_Collector_WPBP_Debug.php';
+			}
             $this->title = $title;
             $this->output = array();
 
@@ -39,6 +42,9 @@ class WPBP_Debug {
      * @return array
      */
     public function load (array $output, QM_Collectors $collectors ) {
+		if( !class_exists('QM_Collector_WPBP_Debug_Output') ) {
+			include 'QM_Collector_WPBP_Debug_Output.php';
+		}
         $id = strtolower( str_replace( ' ', '_', $this->title ) );
         if ( $collector = QM_Collectors::get( $id ) ) {
             $output[ $id ] = new QM_Collector_WPBP_Debug_Output( $collector, $this->output, $this->title );

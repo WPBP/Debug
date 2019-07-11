@@ -24,7 +24,7 @@
   ],
   "autoload": {
     "files": [
-      "debug.php"
+      "QM_Collector_WPBP_Debug.php", "QM_Collector_WPBP_Debug_Output.php", "debug.php"
     ]
   }
 }

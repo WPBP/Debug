@@ -7,7 +7,7 @@ class QM_Collector_WPBP_Debug extends QM_Collector {
 	function __construct( $title, $parent ) {
 		$this->title = $title;
 		$this->parent = $parent;
-		$this->id = strtolower( str_replace(' ', '_', $title ) );
+		$this->id = strtolower( str_replace(' ', '-', $title ) );
 	}
 
 	public function name() {

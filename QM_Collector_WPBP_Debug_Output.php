@@ -5,7 +5,7 @@ class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
 		parent::__construct( $collector );
 		$this->output = $output;
 		$this->title = $title;
-		$this->id = strtolower( str_replace(' ', '_', $title ) );
+		$this->id = strtolower( str_replace(' ', '-', $title ) );
 		add_filter( 'qm/output/menus', array( $this, 'admin_menu' ), 101 );
 		add_filter( 'qm/output/title', array( $this, 'admin_title' ), 101 );
 		add_filter( 'qm/output/menu_class', array( $this, 'admin_class' ) );

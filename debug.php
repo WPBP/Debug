@@ -47,7 +47,7 @@ class WPBP_Debug {
             include 'QM_Collector_WPBP_Debug_Output.php';
         }
 
-        $id = strtolower( str_replace( ' ', '_', $this->title ) );
+        $id = strtolower( str_replace( ' ', '-', $this->title ) );
         if ( $collector = QM_Collectors::get( $id ) ) {
             $output[ $id ] = new QM_Collector_WPBP_Debug_Output( $collector, $this->output, $this->title );
         }

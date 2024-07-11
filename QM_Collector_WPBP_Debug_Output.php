@@ -1,6 +1,11 @@
 <?php
 
 class QM_Collector_WPBP_Debug_Output extends QM_Output_Html {
+
+	public $title;
+
+	public $parent;
+
 	public function __construct( QM_Collector $collector, $output, $title ) {
 		parent::__construct( $collector );
 		$this->output = $output;

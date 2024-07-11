@@ -1,6 +1,11 @@
 <?php
 
 class QM_Collector_WPBP_Debug extends QM_Collector {
+
+	public $title;
+
+	public $parent;
+
 	/**
 	 * Register with WordPress API on construct
 	 */

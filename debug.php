@@ -10,6 +10,10 @@
  */
 class WPBP_Debug {
 
+	public $title;
+
+	public $output;
+
     /**
     * Check user cap and WP_DEBUG on init to see if class should continue loading
     *
